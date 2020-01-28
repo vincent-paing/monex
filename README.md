@@ -1,3 +1,5 @@
+ [ ![Download](https://api.bintray.com/packages/vincent-paing/maven/monex/images/download.svg) ](https://bintray.com/vincent-paing/maven/monex/_latestVersion) [![Build Status](https://api.travis-ci.com/vincent-paing/monex.svg?branch=master)](https://travis-ci.com/vincent-paing/monex)
+
 # Monex
 
 Monex is an in-app HTTP inspector for Android OkHttp clients, which is a fork of [Chuck](https://github.com/jgilfelt/chuck) made initially for using internally within [nexlabs](https://nexlabs.co/). 
