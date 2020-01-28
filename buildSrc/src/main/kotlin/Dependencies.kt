@@ -11,6 +11,11 @@ object BuildConfig {
   const val artifactName = "monex"
   const val artifactNameNoOp = "monex-no-op"
 
+  const val description = "A fork of chuck with support for sharing Gitlab Snippet"
+
+  const val license = "Apache-2.0"
+  const val license_url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+
 
   const val versionName =
     "$versionMajor.$versionMinor.$versionPatch"
@@ -21,6 +26,7 @@ object BuildConfig {
 
 object CommonLibs {
   const val android_gradle_plugin = "com.android.tools.build:gradle:3.6.0-rc01"
+  const val bintray_plugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
 
   const val junit = "junit:junit:4.12"
 }

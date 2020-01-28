@@ -1,6 +1,17 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath CommonLibs.bintray_plugin
+  }
+}
+
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jfrog.bintray'
 
 android {
   compileSdkVersion BuildConfig.compileSdk
@@ -30,3 +41,44 @@ dependencies {
   //OKhttp
   implementation OkHttp.client
 }
+
+
+Properties properties = new Properties()
+if (project.rootProject.file("local.properties").exists()) {
+  properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+
+group = "com.aungkyawpaing.monex"
+version = BuildConfig.versionName
+
+project.ext {
+  mavDevelopers = [( properties.getProperty("bintrayUser")):"Aung Kyaw Paing"]
+  mavSiteUrl = "https://github.com/vincent-paing/monex"
+  mavGitUrl = mavSiteUrl + '.git'
+  mavProjectName = BuildConfig.artifactNameNoOp
+  bugTrackerUrl = mavSiteUrl + '/issues/'
+  mavLibraryLicenses = ["Apache-2.0": "http://www.apache.org/licenses/LICENSE-2.0.txt"]
+  mavLibraryDescription = BuildConfig.description
+  mavVersion = BuildConfig.versionName
+}
+
+println(properties.getProperty("bintrayKey"))
+
+bintray {
+  user = properties.getProperty("bintrayUser")
+  key = properties.getProperty("bintrayKey")
+  publications = ['mavenPublish']
+  pkg {
+    repo = "maven"
+    name = BuildConfig.artifactNameNoOp
+    desc = BuildConfig.description
+    websiteUrl = mavSiteUrl
+    vcsUrl = mavGitUrl
+    issueTrackerUrl = bugTrackerUrl
+    licenses = ["Apache-2.0"]
+    publicDownloadNumbers = true
+    publish = true
+  }
+}
+
+apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/gradle-mavenizer.gradle'
