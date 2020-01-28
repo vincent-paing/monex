@@ -1,25 +1,38 @@
 # Monex
 
-Monex is an in-app HTTP inspector for Android OkHttp clients, which is a fork of [Chuck](https://github.com/jgilfelt/chuck) made for using internally within nexlabs. 
+Monex is an in-app HTTP inspector for Android OkHttp clients, which is a fork of [Chuck](https://github.com/jgilfelt/chuck) made initially for using internally within [nexlabs](https://nexlabs.co/). 
 
-The bionomial name of Groundhog, also known as Wood*chuck*, is called
-Marmota Monax. Monax is taken from this name, and repurposed to *nex* as
-in *nexlabs*. Thus, the name **Monex**
+The bionomial name of Groundhog, also known as Wood*chuck*, is called Marmota Monax. Monax is taken from this name, and repurposed to *nex* as in *nexlabs*. Thus, the name **Monex**
 
 ![ ](./images/preview.gif  "Preview")
 
 ## How it works
 
-Monex displays a low-priority notification every time a network request
-is made through your `OkHttpClient`. Tapping on the notification will
-display a list of network requests you have made for your app. You can
-then tap on any item to see full details and share those easily.
+Monex displays a low-priority notification every time a network request is made through your `OkHttpClient`. Tapping on the notification will display a list of network requests you have made for your app. You can then tap on any item to see full details and share those easily.
 
 ## Getting Started
 
 ### Add Dependency
 
-TODO()
+#### Gradle
+
+If you use gradle, add this repository first 
+```groovy 
+repositories {
+	maven { url "https://dl.bintray.com/vincent-paing/maven" } 
+} 
+```
+
+Then add the following depdencies:
+
+```groovy
+dependencies {
+  def monex_version = '0.1.0'
+  
+  debugImplementation "com.aungkyawpaing.monex:monex:$monex_version"
+  releaseImplementation "com.aungkyawpaing.monex:monex-no-op:$monex_version"
+}
+```
 
 ### Setup
 
@@ -37,20 +50,11 @@ Then just hit run and it will start logging each request you made.
 
 ### Hide Notification
 
-You can also pass `showNotification` boolean variable inside
-`MonexInterceptor` constructor. Set this to `false` if you don't want to
-see any notifications. You can still manually launch the history
-activity through `Monex.getLaunchIntent(context))` which return the
-Launcher activity of Monex.
+You can also pass `showNotification` boolean variable inside `MonexInterceptor` constructor. Set this to `false` if you don't want to see any notifications. You can still manually launch the history activity through `Monex.getLaunchIntent(context))` which return the Launcher activity of Monex.
 
 ### Gitlab setup
 
-Monex can uses Gitlab's
-[snippet API](https://docs.gitlab.com/ee/api/snippets.html) to
-automatically generate snippet link for sharing a transaction detail. By
-default, this is disabled. To enable sharing as Gitlab snippet, you will
-have to provide a `MonexGitlabConfig` in the constructor. The
-constructor has two parameters; `accessToken`, and `baseUrl`
+Monex can uses Gitlab's [snippet API](https://docs.gitlab.com/ee/api/snippets.html) to automatically generate snippet link for sharing a transaction detail. By default, this is disabled. To enable sharing as Gitlab snippet, you will have to provide a `MonexGitlabConfig` in the constructor. The constructor has two parameters; `accessToken`, and `baseUrl`
 
 To add an access token,
 
@@ -66,9 +70,7 @@ val gitlabConfig = MonexGitlabConfig(
 )
 ```
 
-**WARNING: Make sure your personal access token was not leaked when
-providing source code to someone. If you feel like it might has been
-leaked, disable the token immediately**
+**WARNING: Make sure your personal access token was not leaked when providing source code to someone. If you feel like it might has been breached, disable the token immediately**
 
 ## Contribution
 

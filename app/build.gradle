@@ -1,3 +1,7 @@
+repositories {
+  maven { url "https://dl.bintray.com/vincent-paing/maven" }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -31,8 +35,9 @@ android {
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
-  debugImplementation project(':monex')
-  releaseImplementation project(':monex-no-op')
+  def monex_version = '0.1.0'
+  debugImplementation "com.aungkyawpaing.monex:monex:$monex_version"
+  releaseImplementation "com.aungkyawpaing.monex:monex-no-op:$monex_version"
 
   implementation Kotlin.stdblib_jdk
   implementation 'androidx.appcompat:appcompat:1.1.0'
