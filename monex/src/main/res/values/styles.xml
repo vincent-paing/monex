@@ -1,0 +1,17 @@
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="MonexBaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/monex_primary</item>
+    <item name="colorPrimaryDark">@color/monex_primary_dark</item>
+    <item name="colorAccent">@color/monex_accent</item>
+    <item name="android:textColorPrimary">@color/monex_primary_text</item>
+    <item name="android:textColorSecondary">@color/monex_secondary_text</item>
+  </style>
+
+  <style name="MonexPopupMenuStyle" parent="Theme.AppCompat.Light">
+    <item name="android:background">@android:color/white</item>
+  </style>
+
+</resources>

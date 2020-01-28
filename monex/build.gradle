@@ -1,0 +1,80 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+
+android {
+  compileSdkVersion BuildConfig.compileSdk
+  buildToolsVersion "29.0.2"
+
+  viewBinding {
+    enabled = true
+  }
+
+  defaultConfig {
+    minSdkVersion BuildConfig.minSdk
+    targetSdkVersion BuildConfig.targetSdk
+    versionCode BuildConfig.versionCode
+    versionName BuildConfig.versionName
+    setProperty("archivesBaseName", "monex-$versionName")
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles 'consumer-rules.pro'
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation Kotlin.stdblib_jdk
+  implementation AndroidXAppCompat.app_compat
+  implementation AndroidXCore.core_ktx
+
+  //UI
+  implementation Material.material
+  implementation AndroidXConstraintLayout.constraint_layout
+  implementation AndroidXViewPager.view_pager_2
+
+  implementation AndroidXPaging.runtime_ktx
+
+  //Lifecycle
+  implementation AndroidArchLifeCycle.lifecycle
+  implementation AndroidArchLifeCycle.common_java8
+  //  "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+  //OKhttp
+  implementation OkHttp.client
+
+  //Moshi
+  implementation Moshi.core
+  kapt Moshi.code_gen
+
+  //SQL
+  implementation ThreeTenBp.android
+
+  //Room
+
+  implementation Room.runtime
+  kapt Room.compiler
+  implementation Room.ktx
+
+  testImplementation Room.testing
+  testImplementation CommonLibs.junit
+  androidTestImplementation AndroidXTestExt.junit
+  androidTestImplementation AndroidXEspresso.core
+}

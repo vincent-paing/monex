@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.aungkyawpaing.monex">
+
+  <uses-permission android:name="android.permission.INTERNET" />
+
+  <application>
+    <activity
+      android:name="com.aungkyawpaing.monex.internal.ui.main.MainActivity"
+      android:theme="@style/MonexBaseTheme" />
+
+    <activity
+      android:name="com.aungkyawpaing.monex.internal.ui.detail.TransactionDetailActivity"
+      android:theme="@style/MonexBaseTheme" />
+
+  </application>
+
+</manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="monex_primary">#FFEB3B</color>
+  <color name="monex_primary_dark">#FBC02D</color>
+  <color name="monex_primary_light">#FFF9C4</color>
+  <color name="monex_accent">#536DFE</color>
+  <color name="monex_primary_text">#212121</color>
+  <color name="monex_secondary_text">#757575</color>
+  <color name="monex_icons">#212121</color>
+  <color name="monex_divider">#BDBDBD</color>
+
+
+  <color name="monex_notification_failed">#B00020</color>
+  <color name="monex_notification_error_response">#FFEB3B</color>
+</resources>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:padding="16dp">
+
+  <TextView
+    android:id="@+id/tvTitleUrl"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/monex_detail_title_url"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/tvTitleMethod"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/monex_detail_title_method"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tvUrl" />
+
+  <TextView
+    android:id="@+id/tvTitleProtocol"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/monex_detail_title_protocol"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tvMethod" />
+
+
+  <TextView
+    android:id="@+id/tvTitleResponse"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/monex_detail_title_response"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tvProtocol" />
+
+  <TextView
+    android:id="@+id/tvTitleSSL"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/monex_detail_title_ssl"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tvTitleResponse" />
+
+  <TextView
+    android:id="@+id/tvTitleRequestTime"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:text="@string/monex_detail_title_request_time"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tvSSL" />
+
+  <TextView
+    android:id="@+id/tvTitleResponseTime"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/monex_detail_title_response_time"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tvRequestTime" />
+
+  <TextView
+    android:id="@+id/tvTitleDuration"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/monex_detail_title_duration"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tvResponseTime" />
+
+
+  <TextView
+    android:id="@+id/tvTitleRequestSize"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:text="@string/monex_detail_title_request_size"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tvDuration" />
+
+  <TextView
+    android:id="@+id/tvTitleResponseSize"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/monex_detail_title_response_size"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tvRequestSize" />
+
+  <TextView
+    android:id="@+id/tvTitleTotalSize"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/monex_detail_title_total_size"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@id/barrier"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tvResponseSize" />
+
+  <androidx.constraintlayout.widget.Barrier
+    android:id="@+id/barrier"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:barrierDirection="right"
+    app:constraint_referenced_ids="tvTitleUrl,tvTitleMethod,tvTitleProtocol,tvTitleResponse,
+    tvTitleSSL,tvTitleRequestTime,tvTitleResponseTime,tvTitleDuration,
+    tvTitleRequestSize,tvTitleResponseSize,tvTitleTotalSize" />
+
+  <TextView
+    android:id="@+id/tvUrl"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleUrl"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleUrl"
+    tools:text="https://api.youtube.com/dQw4w9WgXcQ" />
+
+  <TextView
+    android:id="@+id/tvMethod"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleMethod"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleMethod"
+    tools:text="GET" />
+
+  <TextView
+    android:id="@+id/tvProtocol"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleProtocol"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleProtocol"
+    tools:text="http/1.1" />
+
+  <TextView
+    android:id="@+id/tvResponse"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleResponse"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleResponse"
+    tools:text="200 OK" />
+
+  <TextView
+    android:id="@+id/tvSSL"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleSSL"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleSSL"
+    tools:text="YES" />
+
+  <TextView
+    android:id="@+id/tvRequestTime"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleRequestTime"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleRequestTime"
+    tools:text="Wed Jan 22 13:49:45 GMT+6:30 2020" />
+
+  <TextView
+    android:id="@+id/tvResponseTime"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleResponseTime"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleResponseTime"
+    tools:text="Wed Jan 22 13:49:45 GMT+6:30 2020" />
+
+
+  <TextView
+    android:id="@+id/tvDuration"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleDuration"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleDuration"
+    tools:text="420 ms" />
+
+  <TextView
+    android:id="@+id/tvRequestSize"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleRequestSize"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleRequestSize"
+    tools:text="0.1 kB" />
+
+  <TextView
+    android:id="@+id/tvResponseSize"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleResponseSize"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleResponseSize"
+    tools:text="6.9 kB" />
+
+  <TextView
+    android:id="@+id/tvTotalSize"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    app:layout_constraintBottom_toBottomOf="@id/tvTitleTotalSize"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/barrier"
+    app:layout_constraintTop_toTopOf="@id/tvTitleTotalSize"
+    tools:text="7.0 kB" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

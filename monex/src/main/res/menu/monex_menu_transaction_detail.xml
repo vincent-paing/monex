@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item
+    android:id="@+id/monex_action_share_text"
+    android:title="@string/monex_share_text"
+    app:showAsAction="never" />
+
+  <item
+    android:id="@+id/monex_action_share_curl"
+    android:title="@string/monex_share_curl"
+    app:showAsAction="never" />
+
+  <item
+    android:id="@+id/monex_action_share_gitlab_snippet"
+    android:title="@string/monex_share_gitlab"
+    app:showAsAction="never" />
+</menu>

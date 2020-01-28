@@ -1,0 +1,4 @@
+rootProject.name='monex'
+include ':app'
+include ':monex'
+include ':monex-no-op'
