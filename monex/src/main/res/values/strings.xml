@@ -28,6 +28,7 @@
 
   <string name="monex_share_text">Share As Text</string>
   <string name="monex_share_curl">Share cURL command</string>
+  <string name="monex_share_file">Share File</string>
   <string name="monex_share_gitlab">Share as Gitlab snippet</string>
   <string name="monex_pass_gitlab_access_token">Please pass gitlab access token to interceptor</string>
 

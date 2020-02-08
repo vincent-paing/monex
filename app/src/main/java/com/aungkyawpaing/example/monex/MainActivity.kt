@@ -18,13 +18,9 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    val gitlabConfig = MonexGitlabConfig(
-      accessToken = TODO("YOUR TOKEN"),
-      baseUrl = TODO("YOUR BASE URL")
-    )
 
     val okHttpClient = OkHttpClient.Builder()
-      .addNetworkInterceptor(MonexInterceptor(this, gitlabConfig = gitlabConfig))
+      .addNetworkInterceptor(MonexInterceptor(this))
       .build()
 
     val retrofit = Retrofit.Builder()

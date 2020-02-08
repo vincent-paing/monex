@@ -12,6 +12,19 @@
       android:name="com.aungkyawpaing.monex.internal.ui.detail.TransactionDetailActivity"
       android:theme="@style/MonexBaseTheme" />
 
+    <provider
+      android:name="androidx.core.content.FileProvider"
+      android:authorities="com.aungkyawpaing.monex.provider"
+      android:exported="false"
+      android:grantUriPermissions="true">
+      <!-- ressource file to create -->
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/monex_file_paths">
+      </meta-data>
+    </provider>
+
+
   </application>
 
 </manifest>

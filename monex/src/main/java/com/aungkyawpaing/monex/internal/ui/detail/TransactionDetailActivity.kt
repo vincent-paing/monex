@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import com.aungkyawpaing.monex.R
 import com.aungkyawpaing.monex.databinding.MonexActivityDetailBinding
@@ -14,6 +15,7 @@ import com.aungkyawpaing.monex.internal.helper.GitlabSnippetCreator
 import com.aungkyawpaing.monex.internal.helper.GitlabSnippetCreator.Result.Failed
 import com.aungkyawpaing.monex.internal.helper.GitlabSnippetCreator.Result.Success
 import com.aungkyawpaing.monex.internal.helper.HttpTransactionFormatter
+import com.aungkyawpaing.monex.internal.share.FileSharePlugin
 import com.aungkyawpaing.monex.internal.ui.BaseMonexActivity
 import com.aungkyawpaing.monex.internal.ui.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
@@ -39,6 +41,10 @@ internal class TransactionDetailActivity : BaseMonexActivity<MonexActivityDetail
 
   private val transactionId by lazy {
     intent.getLongExtra(IE_TRANSACTION_ID, 0)
+  }
+
+  private val fileSharePlugin by lazy {
+    FileSharePlugin(this)
   }
 
   override fun bindView(): MonexActivityDetailBinding {
@@ -95,12 +101,18 @@ internal class TransactionDetailActivity : BaseMonexActivity<MonexActivityDetail
       R.id.monex_action_share_gitlab_snippet -> {
         shareGitlabLink()
       }
+      R.id.monex_action_share_file -> {
+        transaction?.let {
+          fileSharePlugin.share(it)
+        }
+      }
       R.id.monex_action_share_curl -> {
         transaction?.let {
           shareText(HttpTransactionFormatter.formatCUrlCommand(it))
         }
       }
     }
+
     return super.onOptionsItemSelected(item)
   }
 
