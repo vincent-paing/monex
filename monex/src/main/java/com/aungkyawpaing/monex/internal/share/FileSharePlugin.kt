@@ -37,7 +37,7 @@ internal class FileSharePlugin constructor(
 
     if (file.exists()) {
 
-      val fileUri = FileProvider.getUriForFile(context, "com.aungkyawpaing.monex.provider", file)
+      val fileUri = FileProvider.getUriForFile(context, "${context.applicationInfo.packageName}.monex.provider", file)
 
       val intent = Intent(Intent.ACTION_SEND)
       intent.apply {

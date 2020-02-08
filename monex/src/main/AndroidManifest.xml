@@ -13,8 +13,8 @@
       android:theme="@style/MonexBaseTheme" />
 
     <provider
-      android:name="androidx.core.content.FileProvider"
-      android:authorities="com.aungkyawpaing.monex.provider"
+      android:name=".internal.helper.MonexFileProvider"
+      android:authorities="${applicationId}.monex.provider"
       android:exported="false"
       android:grantUriPermissions="true">
       <!-- ressource file to create -->

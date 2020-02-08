@@ -68,6 +68,7 @@ bintray {
   user = properties.getProperty("bintrayUser")
   key = properties.getProperty("bintrayKey")
   publications = ['mavenPublish']
+  override = true
   pkg {
     repo = "maven"
     name = BuildConfig.artifactNameNoOp
