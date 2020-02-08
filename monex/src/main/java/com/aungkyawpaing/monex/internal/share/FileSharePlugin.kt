@@ -37,7 +37,7 @@ internal class FileSharePlugin constructor(
 
     if (file.exists()) {
 
-      val fileUri = FileProvider.getUriForFile(context, "com.aungkyawpaing.monex.provider", file)
+      val fileUri = FileProvider.getUriForFile(context, "${context.applicationInfo.packageName}.monex.provider", file)
 
       val intent = Intent(Intent.ACTION_SEND)
       intent.apply {
@@ -50,7 +50,7 @@ internal class FileSharePlugin constructor(
   }
 
   private fun getFileName(httpTransaction: HttpTransaction): String {
-    return "${context.getApplicationName()} ${httpTransaction.method} ${httpTransaction.path} ${LocalDateTime.now().format(
+    return "${context.getApplicationName()} ${httpTransaction.method} ${httpTransaction.path.replace("/", "\\")} ${LocalDateTime.now().format(
       DateTimeFormatter.ISO_DATE_TIME
     )}.txt"
   }
