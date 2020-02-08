@@ -35,9 +35,8 @@ android {
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
-  def monex_version = '0.1.0'
-  debugImplementation "com.aungkyawpaing.monex:monex:$monex_version"
-  releaseImplementation "com.aungkyawpaing.monex:monex-no-op:$monex_version"
+  debugImplementation project(":monex")
+  releaseImplementation project(":monex-no-op")
 
   implementation Kotlin.stdblib_jdk
   implementation 'androidx.appcompat:appcompat:1.1.0'
