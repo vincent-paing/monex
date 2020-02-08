@@ -25,7 +25,7 @@ object BuildConfig {
 }
 
 object CommonLibs {
-  const val android_gradle_plugin = "com.android.tools.build:gradle:3.6.0-rc01"
+  const val android_gradle_plugin = "com.android.tools.build:gradle:3.6.0-rc02"
   const val bintray_plugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
 
   const val junit = "junit:junit:4.12"
