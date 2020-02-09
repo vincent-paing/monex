@@ -50,7 +50,7 @@ internal class FileSharePlugin constructor(
   }
 
   private fun getFileName(httpTransaction: HttpTransaction): String {
-    return "${context.getApplicationName()} ${httpTransaction.method} ${httpTransaction.path.replace("/", "\\")} ${LocalDateTime.now().format(
+    return "${context.getApplicationName()}_${httpTransaction.method}_${httpTransaction.path.replace("/", "\\")}_${LocalDateTime.now().format(
       DateTimeFormatter.ISO_DATE_TIME
     )}.txt"
   }
