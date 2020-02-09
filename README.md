@@ -29,7 +29,7 @@ Then add the following depdencies:
 
 ```groovy
 dependencies {
-  def monex_version = '0.2.1'
+  def monex_version = '0.2.2'
   
   debugImplementation "com.aungkyawpaing.monex:monex:$monex_version"
   releaseImplementation "com.aungkyawpaing.monex:monex-no-op:$monex_version"
