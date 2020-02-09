@@ -101,6 +101,13 @@ internal class TransactionDetailViewPagerAdapter :
           }
 
           tvTotalSize.text = transaction.getTotalSizeString()
+
+          if (transaction.error != null) {
+            tvError.visibility = View.VISIBLE
+            tvError.text = transaction.error.toString()
+          } else {
+            tvError.visibility = View.GONE
+          }
         }
       }
       is RequestViewHolder -> {
@@ -113,9 +120,11 @@ internal class TransactionDetailViewPagerAdapter :
       is ResponseViewHolder -> {
         holder.binding.apply {
           val response = transaction.response
+
           if (response != null) {
             tvResponseInfo.text =
               Html.fromHtml(HttpTransactionFormatter.formatHeadersToHttpFormat(response.responseHeaders))
+
             tvResponseBody.text = response.getFormattedResponseBody()
           }
         }

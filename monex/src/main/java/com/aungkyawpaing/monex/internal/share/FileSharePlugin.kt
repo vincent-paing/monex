@@ -16,6 +16,9 @@ import org.threeten.bp.format.DateTimeFormatter
 import java.io.File
 import java.net.URLConnection
 
+/***
+ * In future, we can abstract with SharePlugins instead of adding every time we want new share options
+ */
 internal class FileSharePlugin constructor(
   private val context: Context
 ) {

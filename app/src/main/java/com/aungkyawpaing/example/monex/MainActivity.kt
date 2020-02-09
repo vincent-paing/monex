@@ -1,16 +1,20 @@
 package com.aungkyawpaing.example.monex
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aungkyawpaing.monex.MonexGitlabConfig
 import com.aungkyawpaing.monex.MonexInterceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,9 +24,8 @@ class MainActivity : AppCompatActivity() {
 
 
     val okHttpClient = OkHttpClient.Builder()
-      .addNetworkInterceptor(MonexInterceptor(this))
+      .addInterceptor(MonexInterceptor(this))
       .build()
-
     val retrofit = Retrofit.Builder()
       .client(okHttpClient)
       .baseUrl("https://jsonplaceholder.typicode.com/")
@@ -45,6 +48,31 @@ class MainActivity : AppCompatActivity() {
 
       })
 
+    }
+
+    val buttonPingError = findViewById<Button>(R.id.btnPingError)
+
+    buttonPingError.setOnClickListener {
+      val request = Request.Builder()
+        .url("https://abcdefghijklmnop.com/qwertyuiop")
+        .build()
+
+      okHttpClient.newCall(request).enqueue(object : okhttp3.Callback {
+        override fun onFailure(call: okhttp3.Call, e: IOException) {
+          Handler(Looper.getMainLooper()).post {
+            Toast.makeText(this@MainActivity, "Fail", Toast.LENGTH_LONG).show()
+          }
+
+        }
+
+        override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+          Handler(Looper.getMainLooper()).post {
+            Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_LONG).show()
+          }
+
+        }
+
+      })
     }
   }
 }

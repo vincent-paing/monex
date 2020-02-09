@@ -24,6 +24,7 @@
   <string name="monex_request">Request</string>
   <string name="monex_curl">cURL</string>
   <string name="monex_response">Response</string>
+  <string name="monex_error">Error</string>
   <string name="monex_omitted_body">Encoded or Binary body omitted)</string>
 
   <string name="monex_share_text">Share As Text</string>
