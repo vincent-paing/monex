@@ -16,7 +16,6 @@ object BuildConfig {
   const val license = "Apache-2.0"
   const val license_url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
 
-
   const val versionName =
     "$versionMajor.$versionMinor.$versionPatch"
   const val versionCode =
@@ -66,7 +65,8 @@ object AndroidXSqlite {
 object AndroidArchLifeCycle {
   private const val version = "2.1.0"
 
-  const val lifecycle = "androidx.lifecycle:lifecycle-extensions:$version"
+  const val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
+  const val view_model = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
   const val lifecycle_compiler = "androidx.lifecycle:lifecycle-compiler:$version"
   const val common_java8 = "androidx.lifecycle:lifecycle-common-java8:$version"
   const val lives = "com.snakydesign.livedataextensions:lives:1.2.1"
@@ -78,7 +78,6 @@ object AndroidArchCore {
   const val common = "androidx.arch.core:core-common:$version"
   const val test = "androidx.arch.core:core-testing:$version"
 }
-
 
 object AndroidXCore {
   private const val version = "1.1.0"

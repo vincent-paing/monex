@@ -29,4 +29,7 @@ internal interface HttpTransactionDao {
   @Delete
   fun delete(httpTransaction: HttpTransaction)
 
+  @Query("DELETE FROM transactions")
+  fun deleteAll()
+
 }

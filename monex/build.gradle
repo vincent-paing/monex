@@ -51,6 +51,8 @@ android {
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation Kotlin.stdblib_jdk
+  implementation KotlinCoroutine.core
+
   implementation AndroidXAppCompat.app_compat
   implementation AndroidXCore.core_ktx
 
@@ -61,8 +63,10 @@ dependencies {
 
   implementation AndroidXPaging.runtime_ktx
 
+
   //Lifecycle
   implementation AndroidArchLifeCycle.lifecycle
+  implementation AndroidArchLifeCycle.view_model
   implementation AndroidArchLifeCycle.common_java8
   //  "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
