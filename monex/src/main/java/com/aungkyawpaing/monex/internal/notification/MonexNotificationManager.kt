@@ -4,9 +4,8 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -20,6 +19,7 @@ import com.aungkyawpaing.monex.internal.data.HttpTransaction
 import com.aungkyawpaing.monex.internal.data.HttpTransaction.Status
 import com.aungkyawpaing.monex.internal.data.HttpTransaction.Status.FAILED
 import com.aungkyawpaing.monex.internal.data.HttpTransaction.Status.REQUESTED
+import com.aungkyawpaing.monex.internal.helper.ClearTransactionService
 import kotlin.math.absoluteValue
 
 /**
@@ -34,6 +34,7 @@ internal class MonexNotificationManager constructor(
     private const val CHANNEL_NAME = "Monex Notification"
     private const val NOTIFICATION_ID = 14524
     private const val MAX_BUFFER_SIZE = 10
+    private const val REQUEST_CODE_CLEAR_SERVICE = 184
 
     private val transactionBuffer: LongSparseArray<HttpTransaction> = LongSparseArray()
     private var transactionCount = 0
@@ -61,7 +62,7 @@ internal class MonexNotificationManager constructor(
   }
 
   init {
-    if (VERSION.SDK_INT >= VERSION_CODES.O) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       val notificationChannel = NotificationChannel(
         CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW
       )
@@ -103,7 +104,22 @@ internal class MonexNotificationManager constructor(
       builder.setNumber(transactionCount)
     }
 
+    builder.addAction(getDeleteAction())
+
     notificationManager.notify(NOTIFICATION_ID, builder.build());
+  }
+
+  private fun getDeleteAction(): NotificationCompat.Action {
+    val title = context.getString(R.string.monex_clear)
+    val deleteIntent = Intent(context, ClearTransactionService::class.java)
+    val pendingIntent = PendingIntent.getService(
+      context,
+      REQUEST_CODE_CLEAR_SERVICE,
+      deleteIntent,
+      PendingIntent.FLAG_ONE_SHOT
+    );
+
+    return NotificationCompat.Action(R.drawable.monex_ic_delete_24dp, title, pendingIntent)
   }
 
   private fun getNotificationText(transaction: HttpTransaction): CharSequence {
@@ -145,6 +161,10 @@ internal class MonexNotificationManager constructor(
       }
 
     }
+  }
+
+  internal fun dismiss() {
+    notificationManager.cancel(NOTIFICATION_ID)
   }
 }
 

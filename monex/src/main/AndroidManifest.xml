@@ -12,6 +12,9 @@
       android:name="com.aungkyawpaing.monex.internal.ui.detail.TransactionDetailActivity"
       android:theme="@style/MonexBaseTheme" />
 
+    <service android:name=".internal.helper.ClearTransactionService"
+      android:exported="false"/>
+
     <provider
       android:name=".internal.helper.MonexFileProvider"
       android:authorities="${applicationId}.monex.provider"

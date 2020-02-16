@@ -17,8 +17,18 @@ class MonexInterceptor constructor(
   /**
    * Gitlab access token for your personal account
    */
-  private val gitlabConfig: MonexGitlabConfig? = null
+  private val gitlabConfig: MonexGitlabConfig? = null,
+  /**
+   * Decay Time, example, will delete everything older than 20 minutes..etc.
+   * Put 0 to set it to NEVER
+   */
+  private val decayTimeInMiliSeconds: Long = 0
 ) : Interceptor {
+
+  companion object {
+    const val DECAY_TIME_NEVER = 0L
+
+  }
 
   override fun intercept(chain: Chain): Response {
     return chain.proceed(chain.request())

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item
+    android:id="@+id/monex_action_delete"
+    android:icon="@drawable/monex_ic_delete_24dp"
+    android:title="@string/monex_clear"
+    app:showAsAction="ifRoom" />
+
+</menu>

@@ -263,5 +263,18 @@
     app:layout_constraintTop_toTopOf="@id/tvTitleTotalSize"
     tools:text="7.0 kB" />
 
+  <TextView
+    android:id="@+id/tvError"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:visibility="gone"
+    app:layout_constraintTop_toBottomOf="@id/tvTotalSize"
+    tools:text="Error" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

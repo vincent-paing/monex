@@ -96,14 +96,12 @@ internal object HttpTransactionFormatter {
       stringBuilder.append("${formatHeaders(transaction.requestHeaders)} \n")
     }
 
-    stringBuilder.append("\n")
     if (transaction.requestBodyIsPlainText) {
       stringBuilder.append("${transaction.getFormattedRequestBody()} \n")
     } else {
       stringBuilder.append("${context.getString(R.string.monex_omitted_body)} \n")
     }
     stringBuilder.append("\n")
-
 
     stringBuilder.append("----------${context.getString(R.string.monex_response)}----------\n")
     if (response != null) {
@@ -117,8 +115,8 @@ internal object HttpTransactionFormatter {
       } else {
         stringBuilder.append("${context.getString(R.string.monex_omitted_body)} \n")
       }
-      stringBuilder.append("\n")
     }
+    stringBuilder.append("\n")
 
     return stringBuilder.toString()
 
