@@ -11,5 +11,9 @@ object Monex {
   fun getLaunchIntent(context: Context): Intent {
     return Intent()
   }
+
+  fun getClearServiceIntent(context: Context): Intent {
+    return Intent()
+  }
 }
 

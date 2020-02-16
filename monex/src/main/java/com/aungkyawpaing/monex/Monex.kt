@@ -2,6 +2,7 @@ package com.aungkyawpaing.monex
 
 import android.content.Context
 import android.content.Intent
+import com.aungkyawpaing.monex.internal.helper.ClearTransactionService
 import com.aungkyawpaing.monex.internal.ui.main.MainActivity
 
 /**
@@ -18,5 +19,15 @@ object Monex {
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
     return intent
   }
+
+  /**
+   * @param context Android Context object
+   * @return An intent that links to [ClearTransactionService] that can be launch with [Context.startService]
+   */
+  fun getClearServiceIntent(context: Context): Intent {
+    val intent = Intent(context, ClearTransactionService::class.java)
+    return intent
+  }
+
 }
 
