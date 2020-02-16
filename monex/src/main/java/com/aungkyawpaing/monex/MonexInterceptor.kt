@@ -48,8 +48,6 @@ class MonexInterceptor constructor(
 
   companion object {
     const val DECAY_TIME_NEVER = 0L
-    val DECAY_TIME_ONE_DAY = Duration.ofDays(1).toMillis()
-    val DECAY_TIME_ONE_WEEK = Duration.ofDays(7).toMillis()
 
     private const val LOG_TAG = "MonexInterceptor"
     private const val maxContentLength = 250000L

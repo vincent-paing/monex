@@ -5,7 +5,7 @@
   <item
     android:id="@+id/monex_action_delete"
     android:icon="@drawable/monex_ic_delete_24dp"
-    android:title="@string/monex_delete"
+    android:title="@string/monex_clear"
     app:showAsAction="ifRoom" />
 
 </menu>

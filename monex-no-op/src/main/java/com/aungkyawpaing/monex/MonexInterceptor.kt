@@ -25,6 +25,11 @@ class MonexInterceptor constructor(
   private val decayTimeInMiliSeconds: Long = 0
 ) : Interceptor {
 
+  companion object {
+    const val DECAY_TIME_NEVER = 0L
+
+  }
+
   override fun intercept(chain: Chain): Response {
     return chain.proceed(chain.request())
   }

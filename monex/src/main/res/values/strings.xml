@@ -27,8 +27,7 @@
   <string name="monex_error">Error</string>
   <string name="monex_omitted_body">Encoded or Binary body omitted)</string>
 
-  <string name="monex_delete">Delete</string>
-
+  <string name="monex_clear">Clear</string>
   <string name="monex_share_text">Share As Text</string>
   <string name="monex_share_curl">Share cURL command</string>
   <string name="monex_share_file">Share File</string>
