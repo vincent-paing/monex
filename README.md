@@ -25,11 +25,11 @@ repositories {
 } 
 ```
 
-Then add the following depdencies:
+Then add the following dependencies:
 
 ```groovy
 dependencies {
-  def monex_version = '0.2.2'
+  def monex_version = '0.3.0'
   
   debugImplementation "com.aungkyawpaing.monex:monex:$monex_version"
   releaseImplementation "com.aungkyawpaing.monex:monex-no-op:$monex_version"
@@ -53,6 +53,14 @@ Then just hit run and it will start logging each request you made.
 ### Hide Notification
 
 You can also pass `showNotification` boolean variable inside `MonexInterceptor` constructor. Set this to `false` if you don't want to see any notifications. You can still manually launch the history activity through `Monex.getLaunchIntent(context))` which return the Launcher activity of Monex.
+
+### Decay Time
+
+Monex can automatically clear historical data. If you don't want a lot of data populated into your local database, then you can add  `decayTimeInMiliSeconds` to parameter in the constructor. By default, it is set to 0, which is never delete automatically.
+
+```
+MonexInterceptor(this, decayTimeInMiliSeconds = Duration.ofDays(1).toMillis()) //Clear after one day
+```
 
 ### Gitlab setup
 
