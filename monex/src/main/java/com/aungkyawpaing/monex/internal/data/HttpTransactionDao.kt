@@ -7,6 +7,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import org.threeten.bp.LocalDateTime
 
 @Dao
 internal interface HttpTransactionDao {
@@ -31,5 +32,8 @@ internal interface HttpTransactionDao {
 
   @Query("DELETE FROM transactions")
   fun deleteAll()
+
+  @Query("DELETE FROM transactions WHERE transactions.requested_date_time < :timestamp")
+  fun deleteByTimestamp(timestamp: LocalDateTime)
 
 }

@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity() {
 
 
     val okHttpClient = OkHttpClient.Builder()
-      .addInterceptor(MonexInterceptor(this))
+      .addInterceptor(MonexInterceptor(this,
+        decayTimeInMiliSeconds = 1000))
       .build()
     val retrofit = Retrofit.Builder()
       .client(okHttpClient)

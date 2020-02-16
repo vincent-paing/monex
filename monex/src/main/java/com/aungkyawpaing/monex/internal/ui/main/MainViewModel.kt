@@ -7,6 +7,8 @@ import androidx.paging.PagedList
 import androidx.paging.toLiveData
 import com.aungkyawpaing.monex.internal.data.HttpTransaction
 import com.aungkyawpaing.monex.internal.data.HttpTransactionDao
+import com.aungkyawpaing.monex.internal.notification.MonexNotificationManager
+import com.aungkyawpaing.monex.internal.notification.MonexNotificationManager.Companion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,6 +28,7 @@ internal class MainViewModel constructor(
       withContext(Dispatchers.IO) {
         transactionDao.deleteAll()
       }
+      MonexNotificationManager.clearBuffer()
     }
 
   }

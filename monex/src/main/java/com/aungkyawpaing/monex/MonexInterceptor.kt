@@ -8,6 +8,7 @@ import com.aungkyawpaing.monex.internal.data.HttpHeader
 import com.aungkyawpaing.monex.internal.data.HttpTransaction
 import com.aungkyawpaing.monex.internal.data.HttpTransactionResponse
 import com.aungkyawpaing.monex.internal.data.gitlab.GitlabConfigStore
+import com.aungkyawpaing.monex.internal.decay.DataDecayManager
 import com.aungkyawpaing.monex.internal.notification.MonexNotificationManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import okhttp3.Headers
@@ -37,21 +38,19 @@ class MonexInterceptor constructor(
   /**
    * Gitlab access token for your personal account
    */
-  private val gitlabConfig: MonexGitlabConfig? = null
+  private val gitlabConfig: MonexGitlabConfig? = null,
+  /**
+   * Decay Time, example, will delete everything older than 20 minutes..etc.
+   * Put 0 to set it to NEVER
+   */
+  private val decayTimeInMiliSeconds: Long = DECAY_TIME_NEVER
 ) : Interceptor {
 
-  init {
-    AndroidThreeTen.init(context)
-
-    if (gitlabConfig != null) {
-      val gitlabTokenStore = GitlabConfigStore(context)
-      gitlabTokenStore.putGitlabToken(gitlabConfig.accessToken)
-      gitlabTokenStore.putGitlabBaseUrl(gitlabConfig.baseUrl)
-    }
-
-  }
-
   companion object {
+    const val DECAY_TIME_NEVER = 0L
+    val DECAY_TIME_ONE_DAY = Duration.ofDays(1).toMillis()
+    val DECAY_TIME_ONE_WEEK = Duration.ofDays(7).toMillis()
+
     private const val LOG_TAG = "MonexInterceptor"
     private const val maxContentLength = 250000L
   }
@@ -68,7 +67,32 @@ class MonexInterceptor constructor(
     db.httpTransactionDao()
   }
 
+  private val dataDecayManager by lazy {
+    DataDecayManager(context)
+  }
+
+  init {
+    AndroidThreeTen.init(context)
+
+    if (gitlabConfig != null) {
+      val gitlabTokenStore = GitlabConfigStore(context)
+      gitlabTokenStore.putGitlabToken(gitlabConfig.accessToken)
+      gitlabTokenStore.putGitlabBaseUrl(gitlabConfig.baseUrl)
+    }
+
+    if (decayTimeInMiliSeconds > 0) {
+      val decayDuration = Duration.ofMillis(decayTimeInMiliSeconds)
+      dataDecayManager.decayDuration = decayDuration
+    }
+
+  }
+
   override fun intercept(chain: Chain): Response {
+    /**
+     * Clean up data
+     */
+    dataDecayManager.cleanUp()
+
     val request = chain.request()
 
     /**

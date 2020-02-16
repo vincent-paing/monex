@@ -74,6 +74,7 @@ internal class MainActivity : BaseMonexActivity<MonexActivityMainBinding>(),
     when (item?.itemId) {
       R.id.monex_action_delete -> {
         viewModel.deleteAll()
+
       }
     }
     return super.onOptionsItemSelected(item)
