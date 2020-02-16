@@ -6,10 +6,10 @@ import android.os.Looper
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.aungkyawpaing.monex.MonexGitlabConfig
 import com.aungkyawpaing.monex.MonexInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.threeten.bp.Duration
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,9 +22,13 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-
     val okHttpClient = OkHttpClient.Builder()
-      .addInterceptor(MonexInterceptor(this))
+      .addInterceptor(
+        MonexInterceptor(
+          this,
+          decayTimeInMiliSeconds = Duration.ofDays(1).toMillis()
+        )
+      )
       .build()
     val retrofit = Retrofit.Builder()
       .client(okHttpClient)

@@ -1,6 +1,8 @@
 package com.aungkyawpaing.monex.internal.ui.main
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +29,11 @@ internal class MainActivity : BaseMonexActivity<MonexActivityMainBinding>(),
   override fun bindView(): MonexActivityMainBinding =
     MonexActivityMainBinding.inflate(layoutInflater)
 
+  private val viewModel by lazy {
+    ViewModelFactory(this)
+      .create(MainViewModel::class.java)
+  }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     AndroidThreeTen.init(this)
@@ -41,8 +48,7 @@ internal class MainActivity : BaseMonexActivity<MonexActivityMainBinding>(),
       addItemDecoration(DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL))
     }
 
-    val viewModel = ViewModelFactory(this)
-      .create(MainViewModel::class.java)
+
     viewModel.transactionListLiveData.observe(this, Observer {
       transactionRecyclerViewAdapter.submitList(it)
     })
@@ -57,6 +63,21 @@ internal class MainActivity : BaseMonexActivity<MonexActivityMainBinding>(),
   override fun onItemClick(transaction: HttpTransaction) {
     val intent = TransactionDetailActivity.newIntent(this, transaction.id)
     startActivity(intent)
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.monex_menu_home, menu)
+    return true
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    when (item?.itemId) {
+      R.id.monex_action_delete -> {
+        viewModel.deleteAll()
+
+      }
+    }
+    return super.onOptionsItemSelected(item)
   }
 }
 
