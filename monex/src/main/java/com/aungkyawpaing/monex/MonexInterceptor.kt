@@ -14,6 +14,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Chain
+import okhttp3.Request
 import okhttp3.Response
 import okhttp3.internal.http.promisesBody
 import okio.Buffer
@@ -50,7 +51,8 @@ class MonexInterceptor constructor(
     const val DECAY_TIME_NEVER = 0L
 
     private const val LOG_TAG = "MonexInterceptor"
-    private const val maxContentLength = 250000L
+    private const val maxContentLength = 1000_000L
+    private const val CONTENT_TYPE_IMAGE = "image"
   }
 
   private val monexNotificationManager by lazy {
@@ -93,9 +95,34 @@ class MonexInterceptor constructor(
 
     val request = chain.request()
 
-    /**
-     * Request stuffs
-     */
+    var httpTransaction = processRequest(request)
+
+    val insertedId = transactionDao.insert(httpTransaction)
+    httpTransaction = httpTransaction.copy(id = insertedId)
+    showNotification(httpTransaction)
+
+    val response: Response
+    try {
+      response = chain.proceed(request)
+    } catch (e: Exception) {
+      val error = e.toString()
+      httpTransaction = httpTransaction.copy(error = error)
+      transactionDao.update(httpTransaction)
+      showNotification(httpTransaction)
+      throw e
+    }
+    httpTransaction = processResponse(response, httpTransaction)
+
+    transactionDao.update(httpTransaction)
+
+    showNotification(httpTransaction)
+
+    return response
+  }
+
+  private fun processRequest(request: Request): HttpTransaction {
+
+    //region: Request stuffs
     val requestBody = request.body
     val requestDateTime = LocalDateTime.now()
     val method = request.method
@@ -108,7 +135,6 @@ class MonexInterceptor constructor(
     var requestHeaders: List<HttpHeader> = request.headers.map {
       HttpHeader(it.first, it.second)
     }
-
     var requestContentType: String? = null
     var contentLength: Long? = null
     if (requestBody != null) {
@@ -136,7 +162,7 @@ class MonexInterceptor constructor(
       }
     }
 
-    var httpTransaction = HttpTransaction(
+    return HttpTransaction(
       id = 0L,
       requestedDateTime = requestDateTime,
       tookDuration = Duration.ZERO,
@@ -151,30 +177,18 @@ class MonexInterceptor constructor(
       requestBodyIsPlainText = isRequestBodyInPlainText,
       requestHeaders = requestHeaders
     )
+  }
 
-    val insertedId = transactionDao.insert(httpTransaction)
-    httpTransaction = httpTransaction.copy(id = insertedId)
-    showNotification(httpTransaction)
-    /**
-     * Response stuffs
-     */
+  private fun processResponse(
+    response: Response,
+    httpTransaction: HttpTransaction
+  ): HttpTransaction {
     val startTime = Instant.now()
-    val response: Response
-    try {
-      response = chain.proceed(request)
-    } catch (e: Exception) {
-      val error = e.toString()
-      httpTransaction = httpTransaction.copy(error = error)
-      transactionDao.update(httpTransaction)
-      showNotification(httpTransaction)
-      throw e
-    }
 
     val timeTaken = Duration.between(startTime, Instant.now())
     val responseDateTime = LocalDateTime.now()
 
-    val responseBody = response.body
-    requestHeaders = response.request.headers.map {
+    val requestHeaders = response.request.headers.map {
       HttpHeader(it.first, it.second)
     }
     val protocol = response.protocol.toString()
@@ -184,6 +198,7 @@ class MonexInterceptor constructor(
       HttpHeader(it.first, it.second)
     }
 
+    val responseBody = response.body
     var responseContentType: String? = null
     var responseContentLength: Long? = null
     if (responseBody != null) {
@@ -196,6 +211,7 @@ class MonexInterceptor constructor(
     var isResponseBodyInPlainText = !bodyHasUnsupportedEncoding(response.headers)
 
     var httpTransactionResponseBody = ""
+    var httpTransactionResponseImageData: ByteArray? = null
 
     if (response.promisesBody() && isResponseBodyInPlainText && responseBody != null) {
       val source = getNativeSource(response)
@@ -209,6 +225,15 @@ class MonexInterceptor constructor(
         httpTransactionResponseBody = readFromBuffer(buffer.clone(), charset)
       } else {
         isResponseBodyInPlainText = false
+
+        //Check if the content type is image
+        val isResponseBodyImage =
+          contentType?.type?.contains(CONTENT_TYPE_IMAGE, ignoreCase = true) ?: false
+
+        if (isResponseBodyImage && buffer.size < maxContentLength) {
+          httpTransactionResponseImageData = buffer.clone().readByteArray()
+        }
+
       }
       responseContentLength = buffer.size
     }
@@ -222,20 +247,16 @@ class MonexInterceptor constructor(
       responseContentType = responseContentType ?: "",
       responseHeaders = responseHeaders,
       responseBody = httpTransactionResponseBody,
-      responseBodyIsPlainText = isResponseBodyInPlainText
+      responseBodyIsPlainText = isResponseBodyInPlainText,
+      responseBodyImageData = httpTransactionResponseImageData
     )
 
-    httpTransaction = httpTransaction.copy(
+
+    return httpTransaction.copy(
       requestHeaders = requestHeaders,
       response = httpTransactionResponse,
       tookDuration = timeTaken
     )
-
-    transactionDao.update(httpTransaction)
-
-    showNotification(httpTransaction)
-
-    return response
   }
 
   private fun showNotification(httpTransaction: HttpTransaction) {
@@ -271,7 +292,7 @@ class MonexInterceptor constructor(
   private fun getNativeSource(response: Response): BufferedSource {
     if (isBodyGzipped(response.headers)) {
       val source = response.peekBody(maxContentLength).source()
-      if (source.buffer().size < maxContentLength) {
+      if (source.buffer.size < maxContentLength) {
         return getNativeSource(source, true)
       } else {
         Log.w(LOG_TAG, "gzip encoded response was too long")

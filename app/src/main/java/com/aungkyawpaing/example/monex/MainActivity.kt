@@ -22,13 +22,13 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
+    val monexInterceptor = MonexInterceptor(
+      this,
+      decayTimeInMiliSeconds = Duration.ofDays(1).toMillis()
+    )
+
     val okHttpClient = OkHttpClient.Builder()
-      .addInterceptor(
-        MonexInterceptor(
-          this,
-          decayTimeInMiliSeconds = Duration.ofDays(1).toMillis()
-        )
-      )
+      .addNetworkInterceptor(monexInterceptor)
       .build()
     val retrofit = Retrofit.Builder()
       .client(okHttpClient)
@@ -59,6 +59,30 @@ class MainActivity : AppCompatActivity() {
     buttonPingError.setOnClickListener {
       val request = Request.Builder()
         .url("https://abcdefghijklmnop.com/qwertyuiop")
+        .build()
+
+      okHttpClient.newCall(request).enqueue(object : okhttp3.Callback {
+        override fun onFailure(call: okhttp3.Call, e: IOException) {
+          Handler(Looper.getMainLooper()).post {
+            Toast.makeText(this@MainActivity, "Fail", Toast.LENGTH_LONG).show()
+          }
+
+        }
+
+        override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+          Handler(Looper.getMainLooper()).post {
+            Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_LONG).show()
+          }
+
+        }
+
+      })
+    }
+
+    val buttonPingImage = findViewById<Button>(R.id.btnPingImage)
+    buttonPingImage.setOnClickListener {
+      val request = Request.Builder()
+        .url("https://www.snopes.com/tachyon/2018/09/elephant-carries-lion.jpg")
         .build()
 
       okHttpClient.newCall(request).enqueue(object : okhttp3.Callback {
