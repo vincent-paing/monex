@@ -64,7 +64,9 @@ dependencies {
   implementation AndroidArchLifeCycle.lifecycle
   implementation AndroidArchLifeCycle.view_model
   implementation AndroidArchLifeCycle.common_java8
-  //  "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+  implementation AndroidXPaging.common
+  implementation AndroidXPaging.runtime
 
   //OKhttp
   implementation OkHttp.client

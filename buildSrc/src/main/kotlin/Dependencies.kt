@@ -86,6 +86,13 @@ object AndroidXCore {
   const val core_ktx = "androidx.core:core-ktx:$version"
 }
 
+object AndroidXPaging {
+  private const val version = "3.0.0-alpha01"
+
+  const val common = "androidx.paging:paging-common:$version"
+  const val runtime = "androidx.paging:paging-runtime:$version"
+}
+
 object AndroidXTest {
   private const val version = "1.3.0-alpha03"
 
@@ -173,7 +180,7 @@ object OkHttp {
 }
 
 object Room {
-  private const val version = "2.2.5"
+  private const val version = "2.3.0-alpha01"
 
   const val runtime = "androidx.room:room-runtime:$version"
   const val compiler = "androidx.room:room-compiler:$version"

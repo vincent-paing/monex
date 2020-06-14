@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.aungkyawpaing.monex.internal.ui.ViewModelFactory
 import com.aungkyawpaing.monex.internal.ui.detail.TransactionDetailActivity
 import com.aungkyawpaing.monex.internal.ui.main.TransactionRecyclerViewAdapter.OnTransactionItemClickListener
 import com.jakewharton.threetenabp.AndroidThreeTen
+import kotlinx.coroutines.launch
 
 /**
  * Created by Vincent on 1/21/20
@@ -50,7 +52,9 @@ internal class MainActivity : BaseMonexActivity<MonexActivityMainBinding>(),
 
 
     viewModel.transactionListLiveData.observe(this, Observer {
-      transactionRecyclerViewAdapter.submitList(it)
+      lifecycleScope.launch {
+        transactionRecyclerViewAdapter.submitData(it)
+      }
     })
   }
 
