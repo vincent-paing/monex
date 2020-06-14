@@ -4,7 +4,7 @@ object BuildConfig {
   const val targetSdk = 29
 
   private const val versionMajor = 0
-  private const val versionMinor = 3
+  private const val versionMinor = 4
   private const val versionPatch = 0
   private const val versionBuild = 0
 
