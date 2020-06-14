@@ -1,5 +1,6 @@
 package com.aungkyawpaing.monex.internal.ui.detail
 
+import android.graphics.BitmapFactory
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -125,7 +126,16 @@ internal class TransactionDetailViewPagerAdapter :
             tvResponseInfo.text =
               Html.fromHtml(HttpTransactionFormatter.formatHeadersToHttpFormat(response.responseHeaders))
 
-            tvResponseBody.text = response.getFormattedResponseBody()
+            if (response.responseBodyImageData != null) {
+              ivResponseBody.visibility = View.VISIBLE
+              tvResponseBody.visibility = View.GONE
+              val bitmap = BitmapFactory.decodeByteArray(response.responseBodyImageData, 0, response.responseBodyImageData.size)
+              ivResponseBody.setImageBitmap(bitmap)
+            }  else {
+              ivResponseBody.visibility = View.GONE
+              tvResponseBody.visibility = View.VISIBLE
+              tvResponseBody.text = response.getFormattedResponseBody()
+            }
           }
         }
       }

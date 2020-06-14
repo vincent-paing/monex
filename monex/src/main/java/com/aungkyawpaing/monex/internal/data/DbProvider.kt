@@ -13,7 +13,8 @@ internal object DbProvider {
         context,
         MonexDatabase::class.java,
         "monex.db"
-      ).build()
+      ).fallbackToDestructiveMigration()
+        .build()
     }
 
     return db!!

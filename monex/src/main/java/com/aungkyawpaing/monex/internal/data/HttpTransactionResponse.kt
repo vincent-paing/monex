@@ -22,6 +22,7 @@ internal data class HttpTransactionResponse(
   @ColumnInfo(name = "responseContentType") val responseContentType: String,
   @ColumnInfo(name = "responseHeaders") val responseHeaders: List<HttpHeader>,
   @ColumnInfo(name = "responseBody") val responseBody: String,
+  @ColumnInfo(name = "responseBodyImageData") val responseBodyImageData: ByteArray? = null,
   @ColumnInfo(
     name = "responseBodyIsPlainText",
     defaultValue = "true"

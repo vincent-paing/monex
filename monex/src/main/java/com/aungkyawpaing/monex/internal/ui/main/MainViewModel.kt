@@ -1,14 +1,12 @@
 package com.aungkyawpaing.monex.internal.ui.main
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagedList
-import androidx.paging.toLiveData
-import com.aungkyawpaing.monex.internal.data.HttpTransaction
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.aungkyawpaing.monex.internal.data.HttpTransactionDao
 import com.aungkyawpaing.monex.internal.notification.MonexNotificationManager
-import com.aungkyawpaing.monex.internal.notification.MonexNotificationManager.Companion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -20,8 +18,12 @@ internal class MainViewModel constructor(
   private val transactionDao: HttpTransactionDao
 ) : ViewModel() {
 
-  val transactionListLiveData: LiveData<PagedList<HttpTransaction>> =
-    transactionDao.getByDateOrdered().toLiveData(pageSize = 20)
+  val transactionListLiveData = Pager(
+    PagingConfig(pageSize = 20)
+  ) {
+    transactionDao.getByDateOrdered()
+  }.flow.asLiveData(context = viewModelScope.coroutineContext)
+
 
   fun deleteAll() {
     viewModelScope.launch {

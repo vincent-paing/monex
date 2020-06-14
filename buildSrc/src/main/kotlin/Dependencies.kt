@@ -4,7 +4,7 @@ object BuildConfig {
   const val targetSdk = 29
 
   private const val versionMajor = 0
-  private const val versionMinor = 3
+  private const val versionMinor = 4
   private const val versionPatch = 0
   private const val versionBuild = 0
 
@@ -24,7 +24,7 @@ object BuildConfig {
 }
 
 object CommonLibs {
-  const val android_gradle_plugin = "com.android.tools.build:gradle:3.6.0-rc02"
+  const val android_gradle_plugin = "com.android.tools.build:gradle:4.0.0"
   const val bintray_plugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
 
   const val junit = "junit:junit:4.12"
@@ -51,7 +51,7 @@ object AndroidXConstraintLayout {
 object AndroidXViewPager {
   const val view_pager = "androidx.viewpager:viewpager:1.0.0"
 
-  const val view_pager_2 = "androidx.viewpager2:viewpager2:1.0.0-rc01"
+  const val view_pager_2 = "androidx.viewpager2:viewpager2:1.0.0"
 }
 
 object AndroidXSqlite {
@@ -86,20 +86,11 @@ object AndroidXCore {
   const val core_ktx = "androidx.core:core-ktx:$version"
 }
 
-object AndroidXFragment {
-  private const val version = "1.2.0-rc05"
-
-  const val fragment = "androidx.fragment:fragment:$version"
-  const val fragment_ktx = "androidx.fragment:fragment-ktx:$version"
-  const val fragment_testing = "androidx.fragment:fragment-testing:$version"
-}
-
 object AndroidXPaging {
+  private const val version = "3.0.0-alpha01"
 
-  private const val version = "2.1.1"
-
-  const val common = "androidx.paging:paging-common::$version"
-  const val runtime_ktx = "androidx.paging:paging-runtime-ktx:$version"
+  const val common = "androidx.paging:paging-common:$version"
+  const val runtime = "androidx.paging:paging-runtime:$version"
 }
 
 object AndroidXTest {
@@ -133,26 +124,11 @@ object AndroidXEspresso {
 //endregion
 
 object Material {
-  const val material = "com.google.android.material:material:1.2.0-alpha02"
+  const val material = "com.google.android.material:material:1.1.0"
 }
 
 object Coil {
   const val coil = "io.coil-kt:coil:0.6.1"
-}
-
-object Detekt {
-  private const val version = "1.1.1"
-
-  const val plugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$version"
-
-}
-
-object Glide {
-  private const val version = "4.10.0"
-
-  const val runtime = "com.github.bumptech.glide:glide:$version"
-  const val compiler = "com.github.bumptech.glide:compiler:$version"
-  const val transformations = "jp.wasabeef:glide-transformations:4.0.1"
 }
 
 object Kakao {
@@ -162,7 +138,7 @@ object Kakao {
 }
 
 object Kotlin {
-  private const val version = "1.3.61"
+  private const val version = "1.3.71"
 
   const val stdblib_jdk = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
   const val gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
@@ -187,7 +163,7 @@ object Mockito {
 }
 
 object Moshi {
-  private const val version = "1.9.2"
+  private const val version = "1.9.3"
 
   const val core = "com.squareup.moshi:moshi:$version"
   const val adapters = "com.squareup.moshi:moshi-adapters:$version"
@@ -196,7 +172,7 @@ object Moshi {
 }
 
 object OkHttp {
-  private const val version = "4.3.1"
+  private const val version = "4.7.2"
 
   const val client = "com.squareup.okhttp3:okhttp:$version"
   const val logger = "com.squareup.okhttp3:logging-interceptor:$version"
@@ -204,7 +180,7 @@ object OkHttp {
 }
 
 object Room {
-  private const val version = "2.2.3"
+  private const val version = "2.3.0-alpha01"
 
   const val runtime = "androidx.room:room-runtime:$version"
   const val compiler = "androidx.room:room-compiler:$version"
@@ -217,5 +193,5 @@ object ThreeTenBp {
 
   const val core = "org.threeten:threetenbp:$version"
   const val no_tz_db = "org.threeten:threetenbp:$version:no-tzdb"
-  const val android = "com.jakewharton.threetenabp:threetenabp:1.2.1"
+  const val android = "com.jakewharton.threetenabp:threetenabp:1.2.4"
 }
