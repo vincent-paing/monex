@@ -53,16 +53,12 @@ dependencies {
   implementation Kotlin.stdblib_jdk
   implementation KotlinCoroutine.core
 
-  implementation AndroidXAppCompat.app_compat
   implementation AndroidXCore.core_ktx
 
   //UI
   implementation Material.material
   implementation AndroidXConstraintLayout.constraint_layout
   implementation AndroidXViewPager.view_pager_2
-
-  implementation AndroidXPaging.runtime_ktx
-
 
   //Lifecycle
   implementation AndroidArchLifeCycle.lifecycle
@@ -101,7 +97,7 @@ group = "com.aungkyawpaing.monex"
 version = BuildConfig.versionName
 
 project.ext {
-  mavDevelopers = [( properties.getProperty("bintrayUser")):"Aung Kyaw Paing"]
+  mavDevelopers = [(properties.getProperty("bintrayUser")): "Aung Kyaw Paing"]
   mavSiteUrl = "https://github.com/vincent-paing/monex"
   mavGitUrl = mavSiteUrl + '.git'
   mavProjectName = BuildConfig.artifactName
