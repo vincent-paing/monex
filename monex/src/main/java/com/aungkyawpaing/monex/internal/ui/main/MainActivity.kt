@@ -3,6 +3,7 @@ package com.aungkyawpaing.monex.internal.ui.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,7 +13,7 @@ import com.aungkyawpaing.monex.R
 import com.aungkyawpaing.monex.databinding.MonexActivityMainBinding
 import com.aungkyawpaing.monex.internal.data.HttpTransaction
 import com.aungkyawpaing.monex.internal.ui.BaseMonexActivity
-import com.aungkyawpaing.monex.internal.ui.ViewModelFactory
+import com.aungkyawpaing.monex.internal.ui.MonexViewModelFactory
 import com.aungkyawpaing.monex.internal.ui.detail.TransactionDetailActivity
 import com.aungkyawpaing.monex.internal.ui.main.TransactionRecyclerViewAdapter.OnTransactionItemClickListener
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -31,10 +32,9 @@ internal class MainActivity : BaseMonexActivity<MonexActivityMainBinding>(),
   override fun bindView(): MonexActivityMainBinding =
     MonexActivityMainBinding.inflate(layoutInflater)
 
-  private val viewModel by lazy {
-    ViewModelFactory(this)
-      .create(MainViewModel::class.java)
-  }
+  private val viewModel by viewModels<MainViewModel>(factoryProducer = {
+    MonexViewModelFactory(this)
+  })
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

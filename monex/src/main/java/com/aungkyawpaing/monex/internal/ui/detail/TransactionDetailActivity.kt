@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import com.aungkyawpaing.monex.R
 import com.aungkyawpaing.monex.databinding.MonexActivityDetailBinding
@@ -17,7 +16,7 @@ import com.aungkyawpaing.monex.internal.helper.GitlabSnippetCreator.Result.Succe
 import com.aungkyawpaing.monex.internal.helper.HttpTransactionFormatter
 import com.aungkyawpaing.monex.internal.share.FileSharePlugin
 import com.aungkyawpaing.monex.internal.ui.BaseMonexActivity
-import com.aungkyawpaing.monex.internal.ui.ViewModelFactory
+import com.aungkyawpaing.monex.internal.ui.MonexViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -56,7 +55,7 @@ internal class TransactionDetailActivity : BaseMonexActivity<MonexActivityDetail
   }
 
   private val viewModel by lazy {
-    ViewModelFactory(this)
+    MonexViewModelFactory(this)
       .create(TransactionDetailViewModel::class.java)
   }
 

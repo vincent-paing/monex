@@ -63,7 +63,7 @@ object AndroidXSqlite {
 }
 
 object AndroidArchLifeCycle {
-  private const val version = "2.1.0"
+  private const val version = "2.2.0"
 
   const val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
   const val view_model = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"

@@ -11,7 +11,7 @@ import com.aungkyawpaing.monex.internal.ui.main.MainViewModel
 /**
  * Created by Vincent on 1/21/20
  */
-internal class ViewModelFactory constructor(
+internal class MonexViewModelFactory constructor(
   val context: Context
 ) : ViewModelProvider.Factory {
 
@@ -23,9 +23,9 @@ internal class ViewModelFactory constructor(
   override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
     if (modelClass.name == MainViewModel::class.java.name) {
-      return modelClass.getConstructor(HttpTransactionDao::class.java).newInstance(transactionDao)
+      return MainViewModel(transactionDao) as T
     } else if (modelClass.name == TransactionDetailViewModel::class.java.name) {
-      return modelClass.getConstructor(HttpTransactionDao::class.java).newInstance(transactionDao)
+      return TransactionDetailViewModel(transactionDao) as T
     }
 
     throw IllegalStateException()

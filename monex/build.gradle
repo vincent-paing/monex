@@ -60,6 +60,9 @@ dependencies {
   implementation AndroidXConstraintLayout.constraint_layout
   implementation AndroidXViewPager.view_pager_2
 
+  //Activity
+  implementation 'androidx.activity:activity-ktx:1.1.0'
+
   //Lifecycle
   implementation AndroidArchLifeCycle.lifecycle
   implementation AndroidArchLifeCycle.view_model
