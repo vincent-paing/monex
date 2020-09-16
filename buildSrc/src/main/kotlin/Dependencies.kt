@@ -5,7 +5,7 @@ object BuildConfig {
 
   private const val versionMajor = 0
   private const val versionMinor = 4
-  private const val versionPatch = 0
+  private const val versionPatch = 2
   private const val versionBuild = 0
 
   const val artifactName = "monex"
@@ -63,7 +63,7 @@ object AndroidXSqlite {
 }
 
 object AndroidArchLifeCycle {
-  private const val version = "2.1.0"
+  private const val version = "2.2.0"
 
   const val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
   const val view_model = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"

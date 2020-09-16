@@ -2,15 +2,14 @@ package com.aungkyawpaing.monex.internal.share
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.core.content.FileProvider
-import androidx.core.net.toUri
 import com.aungkyawpaing.monex.R
 import com.aungkyawpaing.monex.internal.data.DbProvider
 import com.aungkyawpaing.monex.internal.data.HttpTransaction
 import com.aungkyawpaing.monex.internal.helper.FileHelper
 import com.aungkyawpaing.monex.internal.helper.HttpTransactionFormatter
 import com.aungkyawpaing.monex.internal.helper.getApplicationName
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import java.io.File
@@ -40,7 +39,11 @@ internal class FileSharePlugin constructor(
 
     if (file.exists()) {
 
-      val fileUri = FileProvider.getUriForFile(context, "${context.applicationInfo.packageName}.monex.provider", file)
+      val fileUri = FileProvider.getUriForFile(
+        context,
+        "${context.applicationInfo.packageName}.monex.provider",
+        file
+      )
 
       val intent = Intent(Intent.ACTION_SEND)
       intent.apply {
@@ -53,9 +56,9 @@ internal class FileSharePlugin constructor(
   }
 
   private fun getFileName(httpTransaction: HttpTransaction): String {
-    return "${context.getApplicationName()}_${httpTransaction.method}_${httpTransaction.path.replace("/", "\\")}_${LocalDateTime.now().format(
-      DateTimeFormatter.ISO_DATE_TIME
-    )}.txt"
+    return "${context.getApplicationName()}_${httpTransaction.method}_" +
+        "${httpTransaction.path.toHttpUrl().pathSegments.getOrElse(0) { "" }}_" +
+        "${LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).replace(":", "")}.txt"
   }
 
   private fun getFileContent(httpTransaction: HttpTransaction): String {
