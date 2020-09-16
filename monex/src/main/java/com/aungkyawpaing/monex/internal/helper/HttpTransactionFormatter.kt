@@ -62,8 +62,10 @@ internal object HttpTransactionFormatter {
     val status = transaction.getStatus()
     if (status == HttpTransaction.Status.FAILED) {
       stringBuilder.append(
-        "${context.getString(R.string.monex_detail_title_response)} : ${transaction.error
-          ?: ""} \n"
+        "${context.getString(R.string.monex_detail_title_response)} : ${
+          transaction.error
+            ?: ""
+        } \n"
       )
     } else if (response != null) {
       stringBuilder.append("${context.getString(R.string.monex_detail_title_response)} : ${response.responseCode} ${response.responseMessage} \n")
@@ -73,8 +75,9 @@ internal object HttpTransactionFormatter {
 
     stringBuilder.append(
       "${context.getString(R.string.monex_detail_title_ssl)} : ${
-      if (transaction.isSSL()) context.getString(R.string.monex_yes)
-      else context.getString(R.string.monex_no)}\n"
+        if (transaction.isSSL()) context.getString(R.string.monex_yes)
+        else context.getString(R.string.monex_no)
+      }\n"
     )
 
     stringBuilder.append("\n")
@@ -138,7 +141,6 @@ internal object HttpTransactionFormatter {
       ) {
         compressed = true
       }
-      stringBuilder.append(" -H " + "\"" + header.name + ": " + header.value + "\"")
       stringBuilder.append(" -H \"${header.name}: ${header.value}\"")
     }
 
